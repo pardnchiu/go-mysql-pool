@@ -130,6 +130,7 @@ type Log struct {
   Stdout    bool   // 啟用控制台輸出 (預設: false)
   MaxSize   int64  // 檔案輪轉前的最大大小 (預設: 16*1024*1024)
   MaxBackup int    // 保留的日誌檔案數量 (預設: 5)
+  Type      string // 輸出格式："json" 為 slog 標準，"text" 為樹狀格式（預設："text"）
 }
 ```
 

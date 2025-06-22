@@ -131,6 +131,7 @@ type Log struct {
   Stdout    bool   // Enable console output (default: false)
   MaxSize   int64  // Maximum file size before rotation (default: 16*1024*1024)
   MaxBackup int    // Number of log files to retain (default: 5)
+  Type      string // Output format: "json" for slog standard, "text" for tree format (default: "text")
 }
 ```
 
