@@ -1,17 +1,22 @@
 # MySQL 連線池 (Golang)
-> 一個適用於 Golang 支持鏈式呼叫的 MySQL 包裝器，具備讀寫分離、查詢建構器和自動日誌記錄功能，提供完整的連線管理。<br>
+> 一個支持鏈式呼叫的 Golang MySQL 包裝器，具備讀寫分離設置、查詢建構器等功能，提供完整的連線管理。<br>
 >> Node.js 版本可在[這裡](https://github.com/pardnchiu/node-mysql-pool)取得<br>
 >> PHP 版本可在[這裡](https://github.com/pardnchiu/php-mysql-pool)取得
 
-[![license](https://img.shields.io/github/license/pardnchiu/go-mysql-pool)](https://github.com/pardnchiu/go-mysql-pool/blob/main/LICENSE) 
+[![license](https://img.shields.io/github/license/pardnchiu/go-mysql-pool)](LICENSE) 
 [![version](https://img.shields.io/github/v/tag/pardnchiu/go-mysql-pool)](https://github.com/pardnchiu/go-mysql-pool/releases) 
-[![readme](https://img.shields.io/badge/readme-English-blue)](https://github.com/pardnchiu/go-mysql-pool/blob/main/README.md) 
+[![readme](https://img.shields.io/badge/readme-English-blue)](README.md) 
 
 ## 三大主軸
 
-- **讀寫分離**：支援讀寫連線池配置，提升資料庫效能
-- **查詢建構器**：鏈式語法的 SQL 查詢建構介面，防止 SQL 注入攻擊
-- **CRUD 操作**：完整的新增、查詢、更新、刪除操作支援
+### 讀寫分離配置
+支援讀寫連線池配置，增加資料庫預連接，提高連接效率
+
+### 查詢建構器
+支持鏈式語法的 SQL 查詢建構介面，防止 SQL 注入攻擊
+
+### CRUD 操作
+完整的新增、查詢、更新、刪除操作支援
 
 ## 依賴套件
 
@@ -33,13 +38,12 @@ import (
   "fmt"
   "log"
   
-  mysqlPool "github.com/pardnchiu/go-mysql-pool"
+  mp "github.com/pardnchiu/go-mysql-pool"
 )
 
 func main() {
-  // 建立配置
-  config := mysqlPool.Config{
-    Read: &mysqlPool.DBConfig{
+  config := mp.Config{
+    Read: &mp.DBConfig{
       Host:       "localhost",
       Port:       3306,
       User:       "root",
@@ -47,7 +51,7 @@ func main() {
       Charset:    "utf8mb4",
       Connection: 10,
     },
-    Write: &mysqlPool.DBConfig{
+    Write: &mp.DBConfig{
       Host:       "localhost",
       Port:       3306,
       User:       "root",
@@ -57,8 +61,8 @@ func main() {
     },
   }
   
-  // 初始化連線池
-  pool, err := mysqlPool.New(config)
+  // 初始化
+  pool, err := mp.New(config)
   if err != nil {
     log.Fatal(err)
   }
@@ -107,7 +111,7 @@ func main() {
 }
 ```
 
-### 配置說明
+## 配置介紹
 
 ```go
 type Config struct {
@@ -134,9 +138,9 @@ type Log struct {
 }
 ```
 
-## 支持的操作
+## 支持操作
 
-### 查詢建構
+### 查詢
 
 ```go
 // 基本查詢
@@ -242,16 +246,15 @@ rows, err := pool.Read.Query("SELECT * FROM users WHERE age > ?", 18)
 result, err := pool.Write.Exec("UPDATE users SET last_login = NOW() WHERE id = ?", userID)
 ```
 
-## 核心功能
+## 可用函式
 
 ### 連線池管理
 
 - **New** - 建立新的連線池
   ```go
-  pool, err := mysqlPool.New(config)
+  pool, err := mp.New(config)
   ```
   - 初始化讀寫分離的連線池
-  - 設定日誌系統
   - 驗證資料庫連線可用性
 
 - **Close** - 關閉連線池
@@ -312,7 +315,7 @@ result, err := pool.Write.Exec("UPDATE users SET last_login = NOW() WHERE id = ?
 
 ## 授權條款
 
-此原始碼專案採用 [MIT](https://github.com/pardnchiu/go-mysql-pool/blob/main/LICENSE) 授權條款。
+此原始碼專案採用 [MIT](LICENSE) 授權條款。
 
 ## 作者
 

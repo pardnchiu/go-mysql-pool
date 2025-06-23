@@ -1,25 +1,32 @@
-# MySQL Connection Pool (Golang)
-> A Chainable MySQL connection wrapper for Golang with read-write separation, query builder, and automatic logging, featuring comprehensive connection management.<br>
->> version Node.js can get [here](https://github.com/pardnchiu/node-mysql-pool)<br>
->> version PHP can get [here](https://github.com/pardnchiu/php-mysql-pool)
+> [!Note]
+> This content is translated by LLM. Original text can be found [here](README.zh.md)
 
-[![license](https://img.shields.io/github/license/pardnchiu/go-mysql-pool)](https://github.com/pardnchiu/go-mysql-pool/blob/main/LICENSE) 
+# MySQL Pool (Golang)
+> A Golang MySQL wrapper with chainable calls, featuring read-write separation, query builder, and complete connection management.<br>
+>> Node.js version available [here](https://github.com/pardnchiu/node-mysql-pool)<br>
+>> PHP version available [here](https://github.com/pardnchiu/php-mysql-pool)
+
+[![license](https://img.shields.io/github/license/pardnchiu/go-mysql-pool)](LICENSE) 
 [![version](https://img.shields.io/github/v/tag/pardnchiu/go-mysql-pool)](https://github.com/pardnchiu/go-mysql-pool/releases) 
-[![readme](https://img.shields.io/badge/readme-中文-blue)](https://github.com/pardnchiu/go-mysql-pool/blob/main/README.zh.md) 
+[![readme](https://img.shields.io/badge/readme-中文-blue)](README.zh.md) 
 
-## Three key features
+## Three Core Features
 
-- **Read-Write Separation**: Support for independent read and write connection pool configurations to enhance database performance
-- **Query Builder**: Fluent SQL query building interface to prevent SQL injection
-- **CRUD Operations**: Complete Create, Read, Update, Delete operation support
+### Read-Write Separation
+Supports read-write connection pool configuration with database pre-connections to improve connection efficiency
+
+### Query Builder
+Chainable SQL query interface that prevents SQL injection attacks
+
+### CRUD Operations
+Complete support for Create, Read, Update, and Delete operations
 
 ## Dependencies
 
 - [`github.com/go-sql-driver/mysql`](https://github.com/go-sql-driver/mysql)
 - [`github.com/pardnchiu/go-logger`](https://github.com/pardnchiu/go-logger)
 
-
-## How to use
+## Usage
 
 ### Installation
 ```bash
@@ -34,13 +41,12 @@ import (
   "fmt"
   "log"
   
-  mysqlPool "github.com/pardnchiu/go-mysql-pool"
+  mp "github.com/pardnchiu/go-mysql-pool"
 )
 
 func main() {
-  // Create configuration
-  config := mysqlPool.Config{
-    Read: &mysqlPool.DBConfig{
+  config := mp.Config{
+    Read: &mp.DBConfig{
       Host:       "localhost",
       Port:       3306,
       User:       "root",
@@ -48,7 +54,7 @@ func main() {
       Charset:    "utf8mb4",
       Connection: 10,
     },
-    Write: &mysqlPool.DBConfig{
+    Write: &mp.DBConfig{
       Host:       "localhost",
       Port:       3306,
       User:       "root",
@@ -58,8 +64,8 @@ func main() {
     },
   }
   
-  // Initialize connection pool
-  pool, err := mysqlPool.New(config)
+  // Initialize
+  pool, err := mp.New(config)
   if err != nil {
     log.Fatal(err)
   }
@@ -80,7 +86,7 @@ func main() {
     log.Fatal(err)
   }
   
-  fmt.Printf("Inserted user with ID: %d\n", lastID)
+  fmt.Printf("Inserted user ID: %d\n", lastID)
   
   // Query data
   rows, err := pool.Read.
@@ -108,7 +114,7 @@ func main() {
 }
 ```
 
-### Configuration Details
+## Configuration
 
 ```go
 type Config struct {
@@ -123,13 +129,13 @@ type DBConfig struct {
   User       string // Database username
   Password   string // Database password
   Charset    string // Character set (default: utf8mb4)
-  Connection int    // Maximum number of connections
+  Connection int    // Maximum connections
 }
 
 type Log struct {
   Path      string // Log directory path (default: ./logs/mysqlPool)
   Stdout    bool   // Enable console output (default: false)
-  MaxSize   int64  // Maximum file size before rotation (default: 16*1024*1024)
+  MaxSize   int64  // Maximum size before file rotation (default: 16*1024*1024)
   MaxBackup int    // Number of log files to retain (default: 5)
   Type      string // Output format: "json" for slog standard, "text" for tree format (default: "text")
 }
@@ -137,7 +143,7 @@ type Log struct {
 
 ## Supported Operations
 
-### Query Builder
+### Queries
 
 ```go
 // Basic query
@@ -224,7 +230,7 @@ lastID, err := pool.Write.
   Table("users").
   Upsert(data, updateData)
 
-// Increment value
+// Increment values
 result, err := pool.Write.
   DB("database_name").
   Table("users").
@@ -243,23 +249,22 @@ rows, err := pool.Read.Query("SELECT * FROM users WHERE age > ?", 18)
 result, err := pool.Write.Exec("UPDATE users SET last_login = NOW() WHERE id = ?", userID)
 ```
 
-## Core Features
+## Available Functions
 
 ### Connection Pool Management
 
-- **New** - Create new connection pool instance
+- **New** - Create new connection pool
   ```go
-  pool, err := mysqlPool.New(config)
+  pool, err := mp.New(config)
   ```
-  - Initialize read-write separated connection pools
-  - Setup logging system and slow query recording
+  - Initialize read-write separated connection pool
   - Validate database connection availability
 
 - **Close** - Close connection pool
   ```go
   err := pool.Close()
   ```
-  - Gracefully close all connections
+  - Close all connections
   - Wait for ongoing queries to complete
   - Release system resources
 
@@ -313,7 +318,7 @@ result, err := pool.Write.Exec("UPDATE users SET last_login = NOW() WHERE id = ?
 
 ## License
 
-This source code project is licensed under the [MIT](https://github.com/pardnchiu/go-mysql-pool/blob/main/LICENSE) License.
+This source code project is licensed under the [MIT](LICENSE) license.
 
 ## Author
 
@@ -330,3 +335,4 @@ This source code project is licensed under the [MIT](https://github.com/pardnchi
 ***
 
 ©️ 2025 [邱敬幃 Pardn Chiu](https://pardn.io)
+
