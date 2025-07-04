@@ -6,8 +6,8 @@
 >> Node.js version available [here](https://github.com/pardnchiu/node-mysql-pool)<br>
 >> PHP version available [here](https://github.com/pardnchiu/php-mysql-pool)
 
-[![license](https://img.shields.io/github/license/pardnchiu/go-mysql-pool)](LICENSE) 
-[![version](https://img.shields.io/github/v/tag/pardnchiu/go-mysql-pool)](https://github.com/pardnchiu/go-mysql-pool/releases) 
+[![license](https://img.shields.io/github/license/pardnchiu/go-mysql)](LICENSE) 
+[![version](https://img.shields.io/github/v/tag/pardnchiu/go-mysql)](https://github.com/pardnchiu/go-mysql/releases) 
 [![readme](https://img.shields.io/badge/readme-中文-blue)](README.zh.md) 
 
 ## Three Core Features
@@ -30,7 +30,7 @@ Complete support for Create, Read, Update, and Delete operations
 
 ### Installation
 ```bash
-go get github.com/pardnchiu/go-mysql-pool
+go get github.com/pardnchiu/go-mysql
 ```
 
 ### Initialization
@@ -41,7 +41,7 @@ import (
   "fmt"
   "log"
   
-  mp "github.com/pardnchiu/go-mysql-pool"
+  mp "github.com/pardnchiu/go-mysql"
 )
 
 func main() {
@@ -133,7 +133,7 @@ type DBConfig struct {
 }
 
 type Log struct {
-  Path      string // Log directory path (default: ./logs/mysqlPool)
+  Path      string // Log directory path (default: ./logs/goMysql)
   Stdout    bool   // Enable console output (default: false)
   MaxSize   int64  // Maximum size before file rotation (default: 16*1024*1024)
   MaxBackup int    // Number of log files to retain (default: 5)

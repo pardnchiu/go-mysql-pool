@@ -1,4 +1,4 @@
-package mysqlPool
+package goMysql
 
 import (
 	"database/sql"
@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	defaultLogPath      = "./logs/mysqlPool"
+	defaultLogPath      = "./logs/goMysql"
 	defaultLogMaxSize   = 16 * 1024 * 1024
 	defaultLogMaxBackup = 5
 )

@@ -1,4 +1,4 @@
-package mysqlPool
+package goMysql
 
 import (
 	"database/sql"

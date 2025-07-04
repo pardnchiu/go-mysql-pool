@@ -3,8 +3,8 @@
 >> Node.js 版本可在[這裡](https://github.com/pardnchiu/node-mysql-pool)取得<br>
 >> PHP 版本可在[這裡](https://github.com/pardnchiu/php-mysql-pool)取得
 
-[![license](https://img.shields.io/github/license/pardnchiu/go-mysql-pool)](LICENSE) 
-[![version](https://img.shields.io/github/v/tag/pardnchiu/go-mysql-pool)](https://github.com/pardnchiu/go-mysql-pool/releases) 
+[![license](https://img.shields.io/github/license/pardnchiu/go-mysql)](LICENSE) 
+[![version](https://img.shields.io/github/v/tag/pardnchiu/go-mysql)](https://github.com/pardnchiu/go-mysql/releases) 
 [![readme](https://img.shields.io/badge/readme-English-blue)](README.md) 
 
 ## 三大主軸
@@ -27,7 +27,7 @@
 
 ### 安裝
 ```bash
-go get github.com/pardnchiu/go-mysql-pool
+go get github.com/pardnchiu/go-mysql
 ```
 
 ### 初始化
@@ -38,7 +38,7 @@ import (
   "fmt"
   "log"
   
-  mp "github.com/pardnchiu/go-mysql-pool"
+  mp "github.com/pardnchiu/go-mysql"
 )
 
 func main() {
@@ -130,7 +130,7 @@ type DBConfig struct {
 }
 
 type Log struct {
-  Path      string // 日誌目錄路徑 (預設: ./logs/mysqlPool)
+  Path      string // 日誌目錄路徑 (預設: ./logs/goMysql)
   Stdout    bool   // 啟用控制台輸出 (預設: false)
   MaxSize   int64  // 檔案輪轉前的最大大小 (預設: 16*1024*1024)
   MaxBackup int    // 保留的日誌檔案數量 (預設: 5)
