@@ -24,7 +24,7 @@ Complete support for Create, Read, Update, and Delete operations
 ## Dependencies
 
 - [`github.com/go-sql-driver/mysql`](https://github.com/go-sql-driver/mysql)
-- [`github.com/pardnchiu/go-logger`](https://github.com/pardnchiu/go-logger)
+- [`github.com/pardnchiu/go-logger`](https://github.com/pardnchiu/go-logger): If you don't need this dependency, you can fork the project and replace it with your preferred logging solution. You can also vote [here](https://forms.gle/EvNLwzpHfxWR2gmP6) to let me know your preference.
 
 ## Usage
 
